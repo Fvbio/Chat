@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Chat Room</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en temps réel</title>
 </head>
 <body>
-    <button id="join">Rejoindre le salon</button>
-    <button id="leave">Quitter le salon</button>
+    <h1>Chat en temps réel</h1>
+    <div id="messages"></div>
+    <input type="text" id="message" placeholder="Saisissez votre message">
+    <button onclick="sendMessage()">Envoyer</button>
 
-    <script type="text/javascript">
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-        
-        $('#join').click(function() {
-            socket.emit('join', {room: 'example_room'});
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+    <script>
+        const socket = io.connect('http://172.20.10.2:5000');
+
+        socket.on('connect', () => {
+            socket.send('Utilisateur connecté');
         });
 
-        $('#leave').click(function() {
-            socket.emit('leave', {room: 'example_room'});
+        socket.on('message', (msg) => {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += `<p>${msg}</p>`;
         });
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message');
+            const message = messageInput.value;
+            socket.send(message);
+            messageInput.value = '';
+        }
     </script>
 </body>
 </html>

@@ -29,4 +29,4 @@ def on_leave(data):
     send('Un utilisateur a quitté le salon ' + room, room=room)
     
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, host='0.0.0.0', debug=True)
