@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'votre_cle_secrete'
+app.config['SECRET_KEY'] = 'Emilienquipete'
 socketio = SocketIO(app)
 
 @app.route('/', methods=['GET', 'POST'])
