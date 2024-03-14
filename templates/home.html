@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Room</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <button id="join">Rejoindre le salon</button>
+    <button id="leave">Quitter le salon</button>
+
+    <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        
+        $('#join').click(function() {
+            socket.emit('join', {room: 'example_room'});
+        });
+
+        $('#leave').click(function() {
+            socket.emit('leave', {room: 'example_room'});
+        });
+    </script>
+</body>
+</html>
