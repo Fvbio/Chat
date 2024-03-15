@@ -3,7 +3,7 @@ Documentation du projet : Logiciel de chat en réseau
 Objectif du projet
 Le but de ce projet était de créer un logiciel de chat en Python permettant à deux personnes ou plus de communiquer en temps réel. Les communications devaient être bidirectionnelles et le délai entre l’envoi et la réception d’un message devait être négligeable.
 
-Partie 1 - Interface en ligne de commande
+Partie 1 - Interface en ligne de commande 
 Dans cette partie, nous avons créé une interface en ligne de commande simple permettant à deux utilisateurs de communiquer. Les utilisateurs peuvent saisir un message et l’envoyer, ainsi que recevoir les messages envoyés par l’autre utilisateur. Pour cela, nous avons utilisé la librairie socket.
 
 Client                         Serveur
