@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href="static/css/home.css">
     <title>Chat en temps réel</title>
+
+    <!-- Styles CSS intégrés -->
     <style> 
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -32,7 +34,6 @@
         }
 
         button {
-            width: calc(100% - 22px); /* Ajuster la largeur */
             padding: 10px; /* Ajuster la hauteur et la taille du texte */
             background-color: #5cb85c;
             border: none;
@@ -56,6 +57,13 @@
             overflow-y: auto;
             height: 400px;
         }
+
+        #envoyer {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+
 
         #messages p {
             background-color: #e9e9e9;
@@ -95,41 +103,59 @@
     </style>
 </head>
 <body>
-
+    
+    <!-- Formulaire de connexion -->
     <form action="" method="post">
         <label for="username">Nom d'utilisateur :</label>
         <input type="text" id="username" name="username" required>
         <button type="submit">Entrer</button>
     </form>
 
+    <!-- Titre du chat -->
     <h1>Chat en temps réel</h1>
+    <!-- Conteneur des messages -->
     <div id="messages"></div>
-    <input type="text" id="message" placeholder="Saisissez votre message">
-    <button onclick="sendMessage()" style="width: calc(50% - 22px); padding: 10px; margin: 50 auto;">Envoyer</button>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
     <script>
+        // Connexion au serveur Socket.io
         const socket = io.connect('http://172.20.10.2:5000');
 
         let username = ""; // variable pour stocker le nom d'utilisateur
 
+        // Gestion de la connexion au serveur
         socket.on('connect', () => {
-
-        
-        socket.send('Utilisateur connecté');
+            socket.send('Utilisateur connecté'); // Envoie un message de connexion
         });
 
+        // Réception des messages du serveur
         socket.on('message', (msg) => {
             const messagesDiv = document.getElementById('messages');
-            messagesDiv.innerHTML += `<p class="user-color">${msg}</p>`;
+            messagesDiv.innerHTML += `<p class="user-color">${msg}</p>`; // Affiche les messages dans le conteneur
         });
 
+        // Fonction pour envoyer un message
         function sendMessage() {
             const messageInput = document.getElementById('message');
             const message = messageInput.value;
-            socket.send('' + message);
-            messageInput.value = '';
+            socket.send('' + message); // Envoie le message au serveur
+            messageInput.value = ''; // Efface le champ de saisie après l'envoi
         }
     </script>
+
+    <!-- Champ de saisie et bouton d'envoi -->
+    <div id="envoyer">
+        <table id="envoyer" >
+            <tr>  
+                <td>  
+                    <input type="text" id="message" placeholder="Saisissez votre message">
+                </td>
+                <td>  
+                    <button onclick="sendMessage()">Envoyer</button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
