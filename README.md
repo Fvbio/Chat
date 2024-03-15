@@ -1,11 +1,12 @@
-Documentation du projet : Logiciel de chat en réseau
+# Documentation du projet : Logiciel de chat en réseau
 
-Objectif du projet
+## Objectif du projet
 Le but de ce projet était de créer un logiciel de chat en Python permettant à deux personnes ou plus de communiquer en temps réel. Les communications devaient être bidirectionnelles et le délai entre l’envoi et la réception d’un message devait être négligeable.
 
-Partie 1 - Interface en ligne de commande 
+## Partie 1 - Interface en ligne de commande
 Dans cette partie, nous avons créé une interface en ligne de commande simple permettant à deux utilisateurs de communiquer. Les utilisateurs peuvent saisir un message et l’envoyer, ainsi que recevoir les messages envoyés par l’autre utilisateur. Pour cela, nous avons utilisé la librairie socket.
 
+```
 Client                         Serveur
   |                              |
   |--- Connexion --------------->|
@@ -22,6 +23,7 @@ Client                         Serveur
   |                              |
   |--- Déconnexion ------------->|
   |                              |
+```
 
 Voici comment cela fonctionne :
 
@@ -35,10 +37,10 @@ Voici comment cela fonctionne :
 
 C'est un cycle continu d'envoi et de réception de messages jusqu'à ce que le client se déconnecte.
 
-
-Partie 2 - Chat multi-utilisateur avec interface graphique
+## Partie 2 - Chat multi-utilisateur avec interface graphique
 Nous avons ensuite amélioré notre logiciel en ajoutant la possibilité pour plusieurs utilisateurs de communiquer dans un groupe et en introduisant une interface graphique. Pour cela, nous avons mis en place un serveur Flask qui fait l’intermédiaire entre les différents clients. Les interfaces graphiques ont été réalisées avec HTML, CSS et JavaScript, et sont fournies par le serveur Flask. Nous avons utilisé la librairie Flask-SocketIO pour permettre une communication bidirectionnelle entre le serveur web et le navigateur.
 
+```
 Client 1                        Serveur                        Client 2
   |                              |                              |
   |--- Connexion --------------->|                              |
@@ -56,6 +58,7 @@ Client 1                        Serveur                        Client 2
   |                              |                              |
   |--- Déconnexion ------------->|                              |
   |                              |                              |
+```
 
 1. Le Client 1 établit une connexion avec le Serveur.
 2. Le Serveur attend qu'un message soit envoyé par le Client 1.
@@ -63,12 +66,12 @@ Client 1                        Serveur                        Client 2
 4. Le Serveur transmet le message du Client 1 au Client 2.
 5. Le Client 2 reçoit le message transmis par le Serveur. Il peut effectuer des actions en réponse au message.
 6. Le Serveur reçoit un autre message du Client 1 et le transmet au Client 2. Le Client 2 peut réagir en conséquence.
-7. Le Client 1 se déconnecte du Serveur. La connexion est fermée.
+7. Le Client 1 se déconnecte du Serveur. La conne
 
 Dans ce schéma, le serveur agit comme un intermédiaire entre les clients. Lorsqu’un client envoie un message, le serveur le reçoit et le transmet à tous les autres clients connectés. De cette façon, tous les clients peuvent communiquer entre eux en temps réel.
 
 
-Explication des fichiers:
+## Explication des fichiers:
 
 client.py : Ce fichier contient le code pour un client de chat en réseau. Il utilise la bibliothèque socket pour établir une connexion avec un serveur et envoyer/recevoir des messages.
 
